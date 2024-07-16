@@ -11,11 +11,15 @@ import SideBar from "../SideBar";
 import "./index.css";
 
 class Dashboard extends Component {
-  state = { isSideBarOpen: false, userData: {}, taskList: [], taskTitle: "" };
+  state = { isSideBarOpen: false, userData: {}, taskList: [], taskTitle: "" ,showError : false,errorMsg : ""};
 
   componentDidMount() {
     const { history } = this.props;
     const userData = localStorage.getItem("user_details");
+    const storedTasks = localStorage.getItem("taskList");
+    if (storedTasks) {
+      this.setState({ taskList: JSON.parse(storedTasks) });
+    }
 
     if (userData) {
       try {
@@ -35,7 +39,7 @@ class Dashboard extends Component {
   };
 
   addNewTask = (event) => {
-    const { taskTitle } = this.state;
+    const { taskTitle ,taskList} = this.state;
     event.preventDefault();
     if (taskTitle) {
     const newTask = {
@@ -46,12 +50,25 @@ class Dashboard extends Component {
       taskList: [...prevstate.taskList, newTask],
       taskTitle: "",
     }));
+    localStorage.setItem("taskList",JSON.stringify([...taskList,newTask]))
+
+  }
+  else {
+    this.setState({showError : true ,errorMsg : "Please provide valid title"})
   }
   };
 
   handleTitleChange = (event) => {
     this.setState({ taskTitle: event.target.value });
   };
+
+  onClickOfDelete = (id) => {
+    const {taskList} = this.state 
+    const updatedTaskList = taskList.filter((each)=> each.id !== id )
+    this.setState({taskList : updatedTaskList})
+    localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
+
+  }
 
   renderTaskList = () => {
     const { taskList } = this.state;
@@ -60,7 +77,7 @@ class Dashboard extends Component {
         {taskList.map((each) => (
           <li className="task-item" key={each.id}>
             <p>{each.taskTitle}</p>
-            <button className = "delete-btn" type="button"><MdDeleteOutline size={30}/></button>
+            <button className = "delete-btn" type="button" onClick={() => this.onClickOfDelete(each.id)}><MdDeleteOutline size={30}/></button>
           </li>
         ))}
       </ul>
@@ -68,7 +85,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { isSideBarOpen, userData, taskTitle, taskList } = this.state;
+    const { isSideBarOpen, userData, taskTitle, taskList ,errorMsg,showError} = this.state;
     const username =
       userData && userData.user_email
         ? userData.user_email.split("@")[0].toUpperCase()
@@ -103,6 +120,7 @@ class Dashboard extends Component {
               <button type="submit" className="add-btn">
                 Add
               </button>
+              {showError && <p className="error-msg">{errorMsg}</p>}
             </form>
             <div className="content" style={{ width: width }}>
               {taskList.length > 0 ? this.renderTaskList() : <h4>No Tasks</h4>}
