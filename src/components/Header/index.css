@@ -1,0 +1,48 @@
+* {
+    margin: 0px;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    height: 90px;
+    background-color: #00004d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .greeting {
+    font-family: "Nunito", sans-serif;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    margin: 0px 50px;
+  }
+
+  .profile {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00004d;
+    font-family: "Nunito";
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0px 50px;
+  }
+
+@media screen and (max-width : 768px) {
+    .greeting {
+        font-size: 15px;
+    }
+    .profile {
+        height: 40px;
+        width: 40px;
+    }
+}
+  

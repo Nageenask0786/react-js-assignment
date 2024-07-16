@@ -1,0 +1,132 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.signup-route {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.signup-form-container {
+  box-shadow: 0px 5px 15px #00000059;
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 8px;
+  background-size: cover;
+  padding: 20px;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 0px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  width: 80%;
+  height: 40px;
+  font-family: "Nunito";
+  border-radius: 4px;
+  padding: 10px;
+  color: #140c2e;
+  font-size: 15px;
+  margin: 10px 0px;
+  border: 1px solid #bbb5ee;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 40px;
+  font-family: "Nunito";
+  border-radius: 4px;
+  padding: 10px;
+  color: #140c2e;
+  font-size: 15px;
+  border: 1px solid #bbb5ee;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 10px 0px;
+}
+
+.password-input {
+  width: 95%;
+  border: 0px;
+  outline: none;
+  margin: 0px;
+}
+
+label {
+  width: 80%;
+  font-family: "Nunito";
+  margin: 5px 0px;
+  font-weight: 600;
+  padding: 0px;
+}
+
+.show-hide-btn {
+  border: 0px;
+  outline: none;
+  background-color: transparent;
+}
+
+.login-btn {
+  height: 40px;
+  width: 80%;
+  background-color: blue;
+  margin: 20px 10px;
+  outline: none;
+  color: #ffffff;
+  border: 0px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Nunito";
+  font-size: 17px;
+  font-weight: 600;
+  background-color: #3333ff;
+  margin-bottom: 40px;
+}
+
+.heading {
+  color: #140c2e;
+  font-family: "Nunito";
+  font-size: 32px;
+  margin: 20px 0px;
+}
+
+.input:focus,
+.password-container:hover {
+  border: 1px solid #3333ff;
+}
+
+@media screen and (max-width: 768px) {
+  .signup-form-container {
+    width: 90%;
+  }
+}
