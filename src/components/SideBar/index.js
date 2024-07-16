@@ -1,7 +1,5 @@
 import { FaTasks } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
-import { FaRegCalendar } from "react-icons/fa";
-import { CgOrganisation } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
 import { withRouter } from "react-router-dom";
 import "./index.css";
@@ -38,10 +36,6 @@ const SideBar = (props) => {
             <p className="item-name">Create Task</p>
           </li>
           <li className="side-bar-item">
-            <CgOrganisation size={20} color="#737373" />
-            <p className="item-name">Stats</p>
-          </li>
-          <li className="side-bar-item">
           <button type="button" onClick={onClickOfLogout} className="btn">
             <MdLogout size={20} color="#737373" />
             <p className="item-name">Logout</p>
@@ -55,9 +49,6 @@ const SideBar = (props) => {
           </li>
           <li className="side-bar-item">
             <IoMdAdd size={20} color="#737373" />
-          </li>
-          <li className="side-bar-item">
-            <FaRegCalendar size={20} color="#737373" />
           </li>
           <li className="side-bar-item">
           <button type="button" onClick={onClickOfLogout} className="btn">

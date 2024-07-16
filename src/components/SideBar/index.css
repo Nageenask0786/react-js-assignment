@@ -7,7 +7,7 @@
     min-height: 100vh;
     height: auto;
     background-color: white;
-    width: 56px;
+    width: 5%;
     border: 1px solid #e6e6e6 ;
    border-top-left-radius: 7px;
    border-bottom-left-radius: 7px;
@@ -18,7 +18,7 @@
     min-height: 100vh;
    height: auto;
     background-color: white;
-    width: 140px;
+    width: 20%;
     border: 1px solid #e6e6e6 ;
 }
 .side-bar-items {
@@ -52,6 +52,7 @@
 .item-name {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     font-size: 15px;
     padding: 0px 0px 0px 12px;
     font-family: "Nunito", sans-serif;
@@ -60,8 +61,20 @@
 }
 
 .btn {
-    height: 100%;
-    width: 100%;
     background-color: transparent;
     border: 0px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+@media screen and (max-width : 768px) {
+    .closed-side-bar {
+        width : 15%
+    }
+    .item-name {
+        display: none;
+    }
+    .opened-side-bar {
+        width: 15%;
+    }
 }
