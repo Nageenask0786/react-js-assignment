@@ -1,9 +1,10 @@
 import { Component } from "react";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import "./index.css";
-import { Link } from "react-router-dom";
+
 
 class Signup extends Component {
   state = {
@@ -11,10 +12,7 @@ class Signup extends Component {
     password: "",
     showPassword: false,
     email: "",
-    lastname: "",
     phonenumber: "",
-    city: "",
-    zipcode: "",
     showErrorMsg: false,
     errorMsg: "",
   };
@@ -35,18 +33,6 @@ class Signup extends Component {
     this.setState({ phonenumber: event.target.value });
   };
 
-  handleLastnameChange = (event) => {
-    this.setState({ lastname: event.target.value });
-  };
-
-  handleCityname = (event) => {
-    this.setState({ city: event.target.value });
-  };
-
-  handleZipcodeChange = (event) => {
-    this.setState({ zipcode: event.target.value });
-  };
-
   showAndHidePassword = () => {
     this.setState((prevState) => ({ showPassword: !prevState.showPassword }));
   };
@@ -56,61 +42,53 @@ class Signup extends Component {
   };
 
   onSignupSuccess = () => {
-    const {history} = this.props
-    this.setState({showErrorMsg : false , errorMsg : ""})
-    history.replace("/login")
-  }
+    const { history } = this.props;
+    this.setState({ showErrorMsg: false, errorMsg: "" });
+    history.replace("/login");
+  };
   onSignupFormSubmit = async (event) => {
     try {
       event.preventDefault();
-      const {
-        firstname,
-        password,
-        email,
-        lastname,
-        phonenumber,
-        city,
-        zipcode,
-      } = this.state;
+      const staticData = {
+        lastname: "Doe",
+        city: "Hyderabad",
+        zipcode: "500071",
+      };
+      const { firstname, password, email, phonenumber } = this.state;
       const userDetails = {
         user_firstname: firstname,
         user_email: email,
         user_phone: phonenumber,
         user_password: password,
-        user_lastname: lastname,
-        user_city: city,
-        user_zipcode: zipcode,
+        user_lastname: staticData.lastname,
+        user_city: staticData.city,
+        user_zipcode: staticData.zipcode,
       };
       const apiUrl =
         "https://syoft.dev/Api/user_registeration/api/user_registeration";
-      const options = { method: "POST", headers: { 'Content-Type': 'application/json' },body: JSON.stringify(userDetails) };
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userDetails),
+      };
       const response = await fetch(apiUrl, options);
       const data = await response.json();
       console.log(data);
       if (response.ok) {
-        this.onSignupSuccess()
-        console.log(data)
+        this.onSignupSuccess();
+        console.log(data);
       } else {
         this.onSignupFailure(data.msg);
       }
     } catch (error) {
-        console.error("Error:", error);
+      console.error("Error:", error);
       this.onLoginFailure("Something went wrong. Please try again.");
-  
     }
   };
 
   renderSignupForm = () => {
-    const {
-      firstname,
-      password,
-      lastname,
-      phonenumber,
-      email,
-      zipcode,
-      showPassword,
-      city,
-    } = this.state;
+    const { firstname, password, phonenumber, email, showPassword } =
+      this.state;
     const inputType = showPassword ? "text" : "password";
     const icon = showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />;
     return (
@@ -170,41 +148,6 @@ class Signup extends Component {
             >
               {icon}
             </button>
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastname">Lastname</label>
-            <input
-              type="text"
-              placeholder="Enter Lastname"
-              id="lastname"
-              onChange={this.handleLastnameChange}
-              value={lastname}
-              className="input"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="city">City</label>
-            <input
-              type="text"
-              placeholder="Enter City"
-              id="city"
-              onChange={this.handleCityname}
-              value={city}
-              className="input"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="zipcode">Zipcode</label>
-            <input
-              type="text"
-              placeholder="Enter Zipcode"
-              id="zipcode"
-              onChange={this.handleZipcodeChange}
-              value={zipcode}
-              className="input"
-            />
           </div>
         </div>
         <button type="submit" className="login-btn">
